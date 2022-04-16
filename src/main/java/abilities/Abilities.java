@@ -3,11 +3,15 @@ package abilities;
 import creatures.utils.AbstractCreature;
 
 public enum Abilities {
-
-    SimpleMeleeHit("Simple Melee hit", 1) {
+    SIMPLE_MELEE_HIT("just simple hit in a face", 1) {
         @Override
-        public void use(AbstractCreature User, AbstractCreature Target) {
-            System.out.println("The " + User.TYPE + " has hit to face the " + Target.TYPE);
+        void printMessageWhenItUsed(AbstractCreature User, AbstractCreature Target) {
+            System.out.println(User.NAME + " hit in a face " + Target.NAME);
+        }
+
+        @Override
+        void affect(AbstractCreature User, AbstractCreature Target) {
+            Target.ActualHP = Target.ActualHP - 1;
         }
     };
 
@@ -20,7 +24,12 @@ public enum Abilities {
     }
 
 
-    public abstract void use(AbstractCreature User, AbstractCreature Target);
+    public void use(AbstractCreature User, AbstractCreature Target) {
+        printMessageWhenItUsed(User, Target);
+        affect(User, Target);
+    }
+
+    ;
 
     public String getDESCRIPTION() {
         return DESCRIPTION;
@@ -29,4 +38,9 @@ public enum Abilities {
     public int getDISTANCE() {
         return DISTANCE;
     }
+
+    abstract void printMessageWhenItUsed(AbstractCreature User, AbstractCreature Target);
+
+    abstract void affect(AbstractCreature User, AbstractCreature Target);
 }
+

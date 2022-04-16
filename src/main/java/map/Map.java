@@ -4,7 +4,7 @@ import creatures.utils.AbstractCreature;
 
 import java.util.HashMap;
 
-abstract class Map {
+public abstract class Map {
 
     static HashMap<Integer, Cell> cells = new HashMap<>() {{
         put(1, new Cell(1));
@@ -19,6 +19,15 @@ abstract class Map {
         put(10, new Cell(10));
     }};
 
+    static int findCreatureCell(AbstractCreature creature) {
+        for (java.util.Map.Entry<Integer, Cell> entry : cells.entrySet()) {
+            if (entry.getValue().getCreatureID() == creature.ID) {
+                return entry.getKey();
+            }
+        }
+        return 0;
+    }
+
     static boolean setCreatureToCell(AbstractCreature creature, int xCoordinate) {
         if (cells.get(xCoordinate).CreatureID != 0) {
             cells.get(xCoordinate).CreatureID = creature.ID;
@@ -31,33 +40,34 @@ abstract class Map {
     }
 
     static boolean deleteCreatureFromCell(AbstractCreature creature) {
-        for (java.util.Map.Entry<Integer, Cell> entry : cells.entrySet()) {
-            if (entry.getValue().getCreatureID() == creature.ID) {
-                entry.getValue().setCreatureID(0);
-                System.out.println(creature.NAME + " was defeated");
-                return true;
-            }
+        int creaturePosition = findCreatureCell(creature);
+
+        if (creaturePosition != 0) {
+            cells.get(creaturePosition).setCreatureID(0);
+            System.out.println(creature.NAME + " was defeated");
+            return true;
+        } else {
+            System.out.println("creature not founded");
+            return false;
         }
-        System.out.println("creature not founded");
-        return false;
     }
 
-//    static boolean moveCreature(AbstractCreature creature, int coordinateTo) {
-//        if (checkMovePossibility(creature, coordinateTo)){
-//            System.out.println(creature.NAME + "move from " + creature);
-//        if (deleteCreatureFromCell(creature) & setCreatureToCell(creature, coordinateTo)) {
-//            return true;
-//        }}
-//        else return false;
-//    }
+    static boolean moveCreature(AbstractCreature creature, int coordinateTo) {
+        boolean result = false;
+
+        if(checkMovePossibility(creature, coordinateTo) & deleteCreatureFromCell(creature) & setCreatureToCell(creature, coordinateTo)) result =true;
+
+        if (result){
+            System.out.println(creature.NAME + "can't move");
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     private static boolean checkMovePossibility(AbstractCreature creature, int coordinateTo) {
-        for (java.util.Map.Entry<Integer, Cell> entry : cells.entrySet()) {
-            if (entry.getValue().getCreatureID() == creature.ID){
-                 return Math.abs(entry.getValue().getX_COORDINATE()-coordinateTo) <= creature.ActualSpeed;
-            }
-        }
-        return false;
+        return Math.abs(cells.get(findCreatureCell(creature)).getX_COORDINATE() - coordinateTo) <= creature.ActualSpeed;
     }
 
     private static class Cell {
