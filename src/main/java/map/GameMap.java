@@ -4,7 +4,7 @@ import creatures.utils.AbstractCreature;
 
 import java.util.HashMap;
 
-public abstract class Map {
+public abstract class GameMap {
 
     static HashMap<Integer, Cell> cells = new HashMap<>() {{
         put(1, new Cell(1));
@@ -19,7 +19,7 @@ public abstract class Map {
         put(10, new Cell(10));
     }};
 
-    static int findCreatureCell(AbstractCreature creature) {
+    public static int findCreatureCell(AbstractCreature creature) {
         for (java.util.Map.Entry<Integer, Cell> entry : cells.entrySet()) {
             if (entry.getValue().getCreatureID() == creature.ID) {
                 return entry.getKey();
@@ -28,18 +28,18 @@ public abstract class Map {
         return 0;
     }
 
-    static boolean setCreatureToCell(AbstractCreature creature, int xCoordinate) {
-        if (cells.get(xCoordinate).CreatureID != 0) {
+    public static boolean setCreatureToCell(AbstractCreature creature, int xCoordinate) {
+        if (cells.get(xCoordinate).CreatureID == 0) {
             cells.get(xCoordinate).CreatureID = creature.ID;
-            System.out.println(creature.NAME + "move to cell " + xCoordinate);
+            System.out.println(creature.NAME + " move to cell " + xCoordinate);
             return true;
         } else {
-            System.out.println("Cell " + xCoordinate + "is busy");
+            System.out.println("Cell " + xCoordinate + " is busy");
             return false;
         }
     }
 
-    static boolean deleteCreatureFromCell(AbstractCreature creature) {
+    public static boolean deleteCreatureFromCell(AbstractCreature creature) {
         int creaturePosition = findCreatureCell(creature);
 
         if (creaturePosition != 0) {
@@ -52,7 +52,7 @@ public abstract class Map {
         }
     }
 
-    static boolean moveCreature(AbstractCreature creature, int coordinateTo) {
+    public static boolean moveCreature(AbstractCreature creature, int coordinateTo) {
         boolean result = false;
 
         if(checkMovePossibility(creature, coordinateTo) & deleteCreatureFromCell(creature) & setCreatureToCell(creature, coordinateTo)) result =true;
@@ -72,7 +72,7 @@ public abstract class Map {
 
     private static class Cell {
         private final int X_COORDINATE;
-        private int CreatureID;
+        private int CreatureID=0;
 
         Cell(int x_coordinate) {
             X_COORDINATE = x_coordinate;

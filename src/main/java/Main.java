@@ -1,14 +1,11 @@
 import creatures.OrcKnight;
-import map.Map;
+import map.GameMap;
+
 
 public class Main {
     public static void main(String[] args) {
         OrcKnight orcPetr = new OrcKnight("Petr");
-        AT.pr();
-    }
-}
-abstract class AT{
-    static void pr(){
-        System.out.println("it work");
+
+        GameMap.setCreatureToCell(orcPetr, 1);
     }
 }
