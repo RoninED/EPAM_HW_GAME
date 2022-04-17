@@ -19,6 +19,7 @@ public abstract class GameMap {
         put(10, new Cell(10));
     }};
 
+
     public static int findCreatureCell(AbstractCreature creature) {
         for (java.util.Map.Entry<Integer, Cell> entry : cells.entrySet()) {
             if (entry.getValue().getCreatureID() == creature.ID) {
@@ -29,7 +30,7 @@ public abstract class GameMap {
     }
 
     public static boolean setCreatureToCell(AbstractCreature creature, int xCoordinate) {
-        if (cells.get(xCoordinate).CreatureID == 0) {
+        if (cells.get(xCoordinate).CreatureID == 0 & findCreatureCell(creature)!=xCoordinate) {
             cells.get(xCoordinate).CreatureID = creature.ID;
             System.out.println(creature.NAME + " move to cell " + xCoordinate);
             return true;
