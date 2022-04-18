@@ -1,4 +1,4 @@
-package map;
+package gamePlay;
 
 import creatures.utils.AbstractCreature;
 
@@ -30,7 +30,7 @@ public abstract class GameMap {
     }
 
     public static boolean setCreatureToCell(AbstractCreature creature, int xCoordinate) {
-        if (cells.get(xCoordinate).CreatureID == 0 & findCreatureCell(creature)!=xCoordinate) {
+        if (cells.get(xCoordinate).CreatureID == 0 & findCreatureCell(creature) != xCoordinate) {
             cells.get(xCoordinate).CreatureID = creature.ID;
             System.out.println(creature.NAME + " move to cell " + xCoordinate);
             return true;
@@ -45,7 +45,7 @@ public abstract class GameMap {
 
         if (creaturePosition != 0) {
             cells.get(creaturePosition).setCreatureID(0);
-            System.out.println(creature.NAME + " was defeated");
+            System.out.println(creature.NAME + " leave cell " + creaturePosition);
             return true;
         } else {
             System.out.println("creature not founded");
@@ -54,26 +54,30 @@ public abstract class GameMap {
     }
 
     public static boolean moveCreature(AbstractCreature creature, int coordinateTo) {
-        boolean result = false;
-
-        if(checkMovePossibility(creature, coordinateTo) & deleteCreatureFromCell(creature) & setCreatureToCell(creature, coordinateTo)) result =true;
-
-        if (result){
-            System.out.println(creature.NAME + "can't move");
+        if (checkMovePossibility(creature, coordinateTo)) {
+            deleteCreatureFromCell(creature);
+            setCreatureToCell(creature, coordinateTo);
             return true;
-        }
-        else {
+        } else {
+            System.out.println(creature.NAME + "can't move");
             return false;
         }
     }
 
     private static boolean checkMovePossibility(AbstractCreature creature, int coordinateTo) {
-        return Math.abs(cells.get(findCreatureCell(creature)).getX_COORDINATE() - coordinateTo) <= creature.ActualSpeed;
+        ;
+        return GameMap.cells.get(coordinateTo).CreatureID==0 & Math.abs(cells.get(findCreatureCell(creature)).getX_COORDINATE() - coordinateTo) < creature.ActualSpeed ;
+    }
+
+    public static void printMap(){
+        cells.forEach((k,v)->{
+            System.out.println(k + ": " + v.CreatureID);
+        });
     }
 
     private static class Cell {
         private final int X_COORDINATE;
-        private int CreatureID=0;
+        private int CreatureID = 0;
 
         Cell(int x_coordinate) {
             X_COORDINATE = x_coordinate;
