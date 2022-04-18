@@ -1,11 +1,6 @@
-import creatures.OrcKnight;
-import gamePlay.GameMap;
-
-
 public class Main {
     public static void main(String[] args) {
-        OrcKnight orcPetr = new OrcKnight("Petr",1);
-
-        GameMap.printMap();
+        System.out.println("Hello adventures");
+        System.out.println("Player 1: Choose your hero");
     }
 }

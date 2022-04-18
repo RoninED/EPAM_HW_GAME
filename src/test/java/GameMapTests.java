@@ -1,4 +1,4 @@
-import creatures.OrcKnight;
+import creatures.classesOfCreatures.OrcKnight;
 import gamePlay.GameMap;
 import org.junit.Test;
 
