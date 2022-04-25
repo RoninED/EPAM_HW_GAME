@@ -15,26 +15,27 @@ abstract public class DataOfCreatures {
 
 
     public static AbstractCreature heroChoosing() {
-        AbstractCreature abstractCreature = null;
+        AbstractCreature returnCreature = null;
 
         System.out.println("Enter Name of creature");
         String name = scanner.nextLine();
 
 
 
-        while (abstractCreature != null) {
+        while (returnCreature == null) {
             System.out.println(
                     "List of heroes: " +
                             "\n1 - Ork knight" +
                             "choose one by press numeric key"
             );
             switch (scanner.nextInt()) {
-                case 1 -> abstractCreature = new OrcKnight(name, getNewIDforCreature());
+                case 1 -> returnCreature = new OrcKnight(name, getNewIDforCreature());
                 default -> System.out.println("wrong number");
 
             }
 
         }
+        return returnCreature;
     }
 
     public static int getNewIDforCreature() {
