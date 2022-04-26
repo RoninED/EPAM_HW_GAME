@@ -16,10 +16,10 @@ public class Main {
         ByteArrayInputStream in = new ByteArrayInputStream(bigInt.toByteArray());
         System.setIn(in);
 
-        String s = new Scanner(System.in).nextInt();
+        Integer s = new Scanner(System.in).nextInt();
 
         System.out.println(s);
-        System.out.println(s);
+
 
     }
 }
