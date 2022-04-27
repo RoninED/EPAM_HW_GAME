@@ -9,14 +9,11 @@ import static org.junit.Assert.assertTrue;
 
 public class CreatureUtils {
 
-    @Test
-    public void getNewID() {
-        assertEquals(DataOfCreatures.getNewIDforCreature(), 0);
-    }
+
 
     @Test
     public void createNewCreature() {
-        DataOfCreatures.heroChoosing();
+        DataOfCreatures.heroFactory();
         System.setIn(new ByteArrayInputStream(BigInteger.valueOf(1).toByteArray()));
 
 //        assertEquals(DataOfCreatures.getNewIDforCreature(), 0);

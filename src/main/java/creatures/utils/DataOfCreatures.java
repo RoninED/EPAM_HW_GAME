@@ -3,42 +3,46 @@ package creatures.utils;
 import creatures.classesOfCreatures.OrcKnight;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
-import static creatures.utils.Utils.scanner;
+
 
 
 /**
  * Contain information about exist creatures
  */
 abstract public class DataOfCreatures {
-    static HashMap<Integer, AbstractCreature> creatures;
+    public static HashMap<Integer, AbstractCreature> creatures = new HashMap<>();
 
 
-    public static AbstractCreature heroChoosing() {
-        AbstractCreature returnCreature = null;
+    public static void heroFactory() {
+        Scanner scanner = new Scanner(System.in);
+
+        AbstractCreature newCreature = null;
+
+        int ID = getNewIdForCreature();
 
         System.out.println("Enter Name of creature");
         String name = scanner.nextLine();
 
-
-
-        while (returnCreature == null) {
+        while (newCreature == null) {
             System.out.println(
                     "List of heroes: " +
                             "\n1 - Ork knight" +
-                            "choose one by press numeric key"
+                            "\nchoose one by press numeric key"
             );
             switch (scanner.nextInt()) {
-                case 1 -> returnCreature = new OrcKnight(name, getNewIDforCreature());
-                default -> System.out.println("wrong number");
-
+                case 1 -> {
+                    newCreature = new OrcKnight(name,ID);
+                    creatures.put(ID, newCreature);
+                }
+                default -> System.out.println("\nwrong number\n");
             }
-
         }
-        return returnCreature;
     }
 
-    public static int getNewIDforCreature() {
+
+    private static int getNewIdForCreature() {
         if (creatures == null) return 0;
         else return creatures.keySet().stream()
                 .mapToInt(n -> n).max().orElse(-1) + 1;
