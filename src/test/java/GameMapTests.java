@@ -41,7 +41,7 @@ public class GameMapTests {
     }
 
     @Test
-    public void notFindedCreature() {
+    public void notFindCreature() {
         assertEquals(GameMap.findCreatureCell(peter), 0);
     }
 

@@ -1,6 +1,7 @@
 package gamePlay;
 
 import creatures.utils.AbstractCreature;
+import creatures.utils.DataOfCreatures;
 
 import java.util.HashMap;
 
@@ -75,6 +76,11 @@ public abstract class GameMap {
         });
     }
 
+    public static void printMap1(){
+        cells.forEach((k,v)->{
+            System.out.println(k + ": " + DataOfCreatures.creatures.get(v.CreatureID).NAME);
+        });
+    }
     private static class Cell {
         private final int X_COORDINATE;
         private int CreatureID = 0;

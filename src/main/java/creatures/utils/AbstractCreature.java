@@ -7,6 +7,7 @@ import java.util.List;
 
 public class AbstractCreature {
 
+    public final String TYPE;
     public final int ID;
     public final String NAME;
     public List <Abilities> ABILITIES;
@@ -26,9 +27,10 @@ public class AbstractCreature {
     public int ActualSpeed;
     public int ActualAgility;
 
-    public AbstractCreature(int ID, String NAME, List<Abilities> ABILITIES, int BASE_HP, int BASE_SP, int BASE_DEFENCE, int BASE_SPEED, int BASE_AGILITY, MasteryLevels MELEE_LEVEL, MasteryLevels RANGE_LEVEL, MasteryLevels INTELLIGENCE_LEVEL) {
+    public AbstractCreature(String TYPE, int ID, String NAME, List<Abilities> ABILITIES, int BASE_HP, int BASE_SP, int BASE_DEFENCE, int BASE_SPEED, int BASE_AGILITY, MasteryLevels MELEE_LEVEL, MasteryLevels RANGE_LEVEL, MasteryLevels INTELLIGENCE_LEVEL) {
 
         //Initialization base parameters
+        this.TYPE = TYPE;
         this.ID = ID;
         this.NAME = NAME;
         this.ABILITIES = ABILITIES;
