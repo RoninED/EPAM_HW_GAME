@@ -67,20 +67,28 @@ public abstract class GameMap {
 
     private static boolean checkMovePossibility(AbstractCreature creature, int coordinateTo) {
         ;
-        return GameMap.cells.get(coordinateTo).CreatureID==0 & Math.abs(cells.get(findCreatureCell(creature)).getX_COORDINATE() - coordinateTo) < creature.ActualSpeed ;
+        return GameMap.cells.get(coordinateTo).CreatureID == 0 & Math.abs(cells.get(findCreatureCell(creature)).getX_COORDINATE() - coordinateTo) < creature.ActualSpeed;
     }
 
-    public static void printMap(){
-        cells.forEach((k,v)->{
+    public static void printMap() {
+        cells.forEach((k, v) -> {
             System.out.println(k + ": " + v.CreatureID);
         });
     }
 
-    public static void printMap1(){
-        cells.forEach((k,v)->{
-            System.out.println(k + ": " + DataOfCreatures.creatures.get(v.CreatureID).NAME);
+    public static void printMap1() {
+        System.out.println("\n-----MAP----------");
+        cells.forEach((k, v) -> {
+            if (v.CreatureID != 0) {
+                System.out.println(k + ": " +
+                        DataOfCreatures.creatures.get(v.CreatureID).TYPE +
+                        " "
+                        + DataOfCreatures.creatures.get(v.CreatureID).NAME);
+            } else System.out.println(k + ": ");
         });
+        System.out.println("-----MAP----------\n");
     }
+
     private static class Cell {
         private final int X_COORDINATE;
         private int CreatureID = 0;

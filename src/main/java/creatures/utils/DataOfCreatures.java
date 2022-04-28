@@ -48,10 +48,12 @@ abstract public class DataOfCreatures {
     }
 
     public static void printListOfCreatures (){
+        System.out.println("\n -----CREATURES----------");
         creatures.forEach((k, v) -> {
             System.out.println(
                     k + "(" + v.ID + ")"+": " + v.TYPE + " " + v.NAME + " (HP_" + v.ActualHP + ")"
             );
         });
+        System.out.println("-----CREATURES----------\n");
     }
 }
