@@ -4,15 +4,14 @@ import gamePlay.GameMap;
 
 public class Main {
     public static void main(String[] args) {
-
-
         gamePlay();
-
-
-
     }
 
     static void gamePlay(){
+        phase1Creating();
+    }
+
+    private static void phase1Creating(){
         System.out.println("Player 1, choose you fighter!!!");
         AbstractCreature Player1Creature = DataOfCreatures.heroFactory();
         GameMap.setCreatureToCell(Player1Creature, 1);
@@ -23,7 +22,6 @@ public class Main {
         GameMap.setCreatureToCell(Player2Creature, 10);
 
         DataOfCreatures.printListOfCreatures();
-
 
         GameMap.printMap1();
     }
