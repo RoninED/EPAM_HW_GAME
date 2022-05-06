@@ -25,4 +25,10 @@ public class Main {
 
         GameMap.printMap1();
     }
+
+    void actionChooser(){
+        
+    }
+
+
 }
