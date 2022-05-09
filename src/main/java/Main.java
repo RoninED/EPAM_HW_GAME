@@ -25,7 +25,7 @@ public class Main {
         System.out.println("Player 2, choose you fighter!!!");
 
         player2 = DataOfCreatures.heroFactory();
-        GameMap.setCreatureToCell(player2, 2);
+        GameMap.setCreatureToCell(player2, 8);
 
         DataOfCreatures.printListOfCreatures();
 
@@ -37,23 +37,38 @@ public class Main {
         boolean actionIsDone = false;
 
         actionIsDone = tryToUseAbility(player, enemy);
+        if (!actionIsDone) actionIsDone = moveToEnemy(player, enemy);
     }
 
-    private static boolean tryToUseAbility(AbstractCreature player, AbstractCreature enemy){
+    private static boolean tryToUseAbility(AbstractCreature player, AbstractCreature enemy) {
         boolean actionIsDone = false;
 
         for (Abilities ability : player.ABILITIES
         ) {
-            if (ability.isItUsable(player, enemy)){
-                if (ability.getIsItForSelf()){
+            if (ability.isItUsable(player, enemy)) {
+                if (ability.getIsItForSelf()) {
                     ability.use(player, player);
-                }
-                else ability.use(player, enemy);
+                } else ability.use(player, enemy);
                 actionIsDone = true;
                 break;
             }
         }
         return actionIsDone;
+    }
+
+    private static boolean moveToEnemy(AbstractCreature player, AbstractCreature enemy) {
+        int playerPosition = GameMap.findCreatureCell(player);
+        int enemyPosition = GameMap.findCreatureCell(enemy);
+
+        int positiveOrNegative = -1;
+        if (playerPosition - enemyPosition < 0) positiveOrNegative = 1;
+        int distance = player.ActualSpeed * positiveOrNegative;
+
+        do {
+            if (GameMap.moveCreature(player, playerPosition + distance)) return true;
+            else distance = distance + positiveOrNegative;
+        } while (distance != 0);
+        return false;
     }
 
 

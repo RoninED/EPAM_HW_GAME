@@ -60,7 +60,7 @@ public abstract class GameMap {
             setCreatureToCell(creature, coordinateTo);
             return true;
         } else {
-            System.out.println(creature.NAME + "can't move");
+            System.out.println(creature.NAME + " can't move");
             return false;
         }
     }
