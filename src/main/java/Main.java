@@ -3,13 +3,24 @@ import creatures.utils.AbstractCreature;
 import creatures.utils.DataOfCreatures;
 import gamePlay.GameMap;
 
+import java.util.Scanner;
+
 public class Main {
     static AbstractCreature player1;
     static AbstractCreature player2;
 
     public static void main(String[] args) {
-        gamePlay();
+        Aaaa aaaa = new Aaaa();
+        increase(aaaa);
+
+        System.out.println(aaaa.str);
     }
+
+    public static void increase(Aaaa b) {
+        b.str = "bbbb";
+
+    }
+
 
     static void gamePlay() {
         phase1Creating();
@@ -73,3 +84,4 @@ public class Main {
 
 
 }
+
